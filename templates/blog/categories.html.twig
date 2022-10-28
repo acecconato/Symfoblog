@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_content %}
+    <section>
+        <h1 class="mb-5">Articles de la catégorie « {{ category.label }} »</h1>
+        {% if category.posts and category.posts is iterable %}
+            <div class="row">
+                {% for post in category.posts %}
+                    <article class="col-4 mb-4" aria-labelledby="{{ post.id }}__title">
+                        <a href="{{ path('show_post', {slug: post.slug}) }}"
+                           class="card text-reset text-decoration-none">
+                            <img class="user__picture card-img-top"
+                                 src="{{ post.image|default('https://via.placeholder.com/1920/1080') }}"
+                                 alt="Image mise en avant de l'article {{ post.title }}">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img class="user__avatar rounded-5" src="{{ post.author.profile.avatar }}"
+                                         width="48"
+                                         height="48"
+                                         alt="Avatar de l'auteur {{ post.author.username }}">
+                                    <h2 id="{{ post.id }}__title" class="h5 card-title my-0">{{ post.title }}</h2>
+                                </div>
+                                <p class="card-text">{{ post.updatedAt|ago|capitalize }}</p>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

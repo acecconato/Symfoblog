@@ -1,0 +1,11 @@
+{% if categories is not empty and categories is iterable %}
+    <ul class="dropdown-menu">
+        {% for category in categories %}
+            <li>
+                <a class="dropdown-item" href="{{ path('show_category', {slug: category.slug}) }}">
+                    {{ category.label }} ({{ category.posts|length }})
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

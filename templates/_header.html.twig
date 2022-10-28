@@ -1,0 +1,46 @@
+{% for type, messages in app.flashes %}
+    <section class="text-center alert alert-{{ type }} mb-0">
+        {% for message in messages %}
+            <p class="m-0">{{ message }}</p>
+        {% endfor %}
+    </section>
+{% endfor %}
+
+<section class="container-fluid bg-dark py-3">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            {% if app.request.attributes.get('_route') == 'app_blog' %}
+                <h1 class="navbar-brand m-0">Symfoblog</h1>
+            {% else %}
+                <p class="h1 navbar-brand m-0">Symfoblog</p>
+            {% endif %}
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mx-5">
+                    <li class="nav-item mx-2">
+                        <a class="nav-item nav-link active" href="{{ path('app_blog') }}">Accueil</a>
+                    </li>
+
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Catégories
+                        </a>
+
+                        {{ render(controller('App\\Controller\\BlogController::menuCategories')) }}
+
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
